@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "react-to-solid",
+	"name": "guestbook",
 	"main": "src/worker/index.ts",
 	"compatibility_date": "2025-07-11",
 	"assets": {
