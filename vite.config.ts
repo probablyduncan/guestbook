@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import solid from "vite-plugin-solid"
 
 import { cloudflare } from "@cloudflare/vite-plugin";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), cloudflare()],
+  plugins: [solid(), cloudflare()],
 })
