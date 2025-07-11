@@ -10,7 +10,7 @@ export function MyCursor() {
 
     const [placeholderIndex, setPlaceholderIndex] = createSignal(0);
     const placeholders = [
-        "type away",
+        "type away . . .",
         "speak your truth",
         "say something",
         "spill it!",
@@ -40,7 +40,7 @@ export function MyCursor() {
 
     let animatePlaceholderIntervalId: number;
     function animatePlaceholder() {
-        
+
         if (!inputElement) {
             return;
         }
