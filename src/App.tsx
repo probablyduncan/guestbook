@@ -7,6 +7,8 @@ function App() {
 
   return (
     <>
+      <h1>Hello!</h1>
+      <p>What's on the menu today?</p>
       <MyCursor />
       <button
         onClick={() => setCount((count) => count + 1)}
