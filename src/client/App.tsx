@@ -1,9 +1,24 @@
 import { createSignal } from 'solid-js'
 import { MyCursor } from './components/MyCursor';
+import { createCursorSocket } from './lib/cursorSocket';
 
 function App() {
   const [count, setCount] = createSignal(0);
-  const [name, setName] = createSignal('unknown')
+  const [name, setName] = createSignal('unknown');
+
+  const { listen } = createCursorSocket();
+
+  // listen("init", (params) => {
+  //   console.log(params);
+  // })
+
+  listen("message", (params) => {
+    console.log("message: ", params.message);
+  })
+
+  listen("init", (params) => {
+    console.log(params);
+  })
 
   return (
     <>
@@ -26,6 +41,7 @@ function App() {
       >
         Hotspot name is: {name()}
       </button>
+      <div class='little-message-popup'>Press <kbd>/</kbd> to say something whimsical.</div>
     </>
   )
 }

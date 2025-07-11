@@ -1,13 +1,70 @@
-import { createSignal, For, onCleanup, onMount } from "solid-js"
+import { createSignal, onCleanup, onMount } from "solid-js"
 import styles from "../styles/cursors.module.css";
-// import { createCursorWS } from "../lib/websocket";
+import { createCursorSocket } from "../lib/cursorSocket";
 
 export function MyCursor() {
 
     const [pos, setPos] = createSignal<[number, number]>([-100, -100]);
     const [message, setMessage] = createSignal<string>("");
     const [cursorIndex, setCursorIndex] = createSignal<number>(0);
+
+    const [placeholderIndex, setPlaceholderIndex] = createSignal(0);
+    const placeholders = [
+        "type away",
+        "speak your truth",
+        "say something",
+        "spill it!",
+        "let it out!",
+        "spill the beans!",
+        "beans? spill 'em",
+        "gossip time",
+        "ok, chatterbox",
+        "look at you",
+        "${placeholder text}",
+        "...",
+        "stop that!!",
+        "i'm listening...",
+        "what is it this time?",
+    ] as const;
+
+    function randomizePlaceholder() {
+        setPlaceholderIndex(prev => {
+            let next = Math.floor(Math.random() * (placeholders.length - 1));
+            if (next >= prev) {
+                next++;
+            }
+            console.log(next);
+            return next;
+        });
+    }
+
+    let animatePlaceholderIntervalId: number;
+    function animatePlaceholder() {
+        
+        if (!inputElement) {
+            return;
+        }
+
+        clearInterval(animatePlaceholderIntervalId);
+        inputElement.placeholder = "";
+
+        const placeholder = placeholders[placeholderIndex()];
+        let i = 0;
+
+        animatePlaceholderIntervalId = setInterval(() => {
+            
+            inputElement.placeholder += placeholder.charAt(i);
+            i++;
+
+            if (i >= placeholder.length) {
+                clearInterval(animatePlaceholderIntervalId);
+            }
+        }, 50);
+    }
+
     // const { sendCursorWSMessage } = createCursorWS();
+
+    const { send } = createCursorSocket();
 
     const hue = Math.floor(Math.random() * 255);
 
@@ -20,7 +77,7 @@ export function MyCursor() {
             e.y / window.innerHeight,
         ];
         setPos(_pos);
-        // sendCursorWSMessage("pos", { pos: _pos })
+        send("pos", { pos: _pos });
     }
 
     function focusInput() {
@@ -47,6 +104,7 @@ export function MyCursor() {
             e.preventDefault();
             focusInput();
             sweat();
+            animatePlaceholder();
         }
     }
 
@@ -73,11 +131,12 @@ export function MyCursor() {
             }
 
             blurInput();
+            randomizePlaceholder();
 
             setMessage(val);
-            // sendCursorWSMessage("message", {
-            //     message: val,
-            // });
+            send("message", {
+                message: val,
+            });
 
             clearTimeout(messageTimeoutId);
             messageTimeoutId = setTimeout(() => {
@@ -92,7 +151,7 @@ export function MyCursor() {
     }
 
     onMount(() => {
-        // sendCursorWSMessage("init", { hue });
+        send("init", { hue });
 
         window.addEventListener("mousemove", handleMouseMove);
         inputElement?.addEventListener("blur", blurInput);
@@ -113,22 +172,9 @@ export function MyCursor() {
             "--y": pos()[1],
             "--hue": hue,
         }}>
-            <svg
-                innerHTML={POINTER_FRAMES[cursorIndex()]}
-            // viewBox="0 0 40 40"
-            // width="40px"
-            // height="40px"
-            />
-            <input hidden ref={inputElement} placeholder="speak!" />
+            <svg innerHTML={POINTER_FRAMES[cursorIndex()]} />
+            <input hidden ref={inputElement} />
             <div>{message()}</div>
-
-            {/* <For each={messages()}>
-                {message => <div style={{
-                    "--x": message.x,
-                    "--y": message.y,
-                    "--r": message.r,
-                }}>{message.message}</div>}
-            </For> */}
         </div>
     )
 }

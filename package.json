@@ -12,6 +12,8 @@
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
+		"partyserver": "^0.0.72",
+		"partysocket": "^1.1.4",
 		"solid-js": "^1.9.7"
 	},
 	"devDependencies": {

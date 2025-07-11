@@ -2,13 +2,13 @@
 	"files": [],
 	"references": [
 		{
-			"path": "./src/client/tsconfig.client.json"
+			"path": "./tsconfig.client.json"
 		},
 		{
 			"path": "./tsconfig.node.json"
 		},
 		{
-			"path": "./src/worker/tsconfig.worker.json"
+			"path": "./tsconfig.worker.json"
 		}
 	],
 	"compilerOptions": {
