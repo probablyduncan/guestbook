@@ -5,7 +5,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "react-to-solid",
-	"main": "worker/index.ts",
+	"main": "src/worker/index.ts",
 	"compatibility_date": "2025-07-11",
 	"assets": {
 		"not_found_handling": "single-page-application"

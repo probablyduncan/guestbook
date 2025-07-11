@@ -27,7 +27,7 @@ export function MyCursor() {
         if (!inputElement) {
             return;
         }
-        
+
         inputElement.value = "";
         inputElement.hidden = false;
         inputElement.focus();
