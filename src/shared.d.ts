@@ -21,21 +21,21 @@ type ClientToServer_CursorMessageKeys = ClientToServer_CursorMessages["type"];
 
 type ServerToClient_CursorMessages = {
     /**
-     * broadcast to others on client message
+     * broadcast message to other connections
      */
     type: "message";
     id: string;
     message: string;
 } | {
     /**
-     * broadcast to others on client pos update
+     * broadcast pos to other connections
      */
     type: "pos";
     id: string;
     pos: [number, number];
 } | {
     /**
-     * sent on connect
+     * send all current connections to new connection
      */
     type: "init";
     connections: {
@@ -45,14 +45,14 @@ type ServerToClient_CursorMessages = {
     }[];
 } | {
     /**
-     * broadcast to others on connect
+     * broadcast new connection to other connections
      */
     type: "join";
     id: string;
     hue: number;
 } | {
     /**
-     * broadcast to others on disconnect
+     * broadcast disconnect to other connections
      */
     type: "leave";
     id: string;

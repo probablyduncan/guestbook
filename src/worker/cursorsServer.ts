@@ -18,21 +18,32 @@ export class Cursors extends Server<Env> {
     }>();
 
     onConnect(connection: Connection, ctx: ConnectionContext): void | Promise<void> {
-        // here, send all current cursors to the client,
+        connection.send(JSON.stringify({
+            type: "init",
+            connections: [...this._cursor_cache.entries()].map(([id, props]) => ({ id, ...props })),
+        }));
+    }
+
+    onClose(connection: Connection, code: number, reason: string, wasClean: boolean): void | Promise<void> {
+        this._cursor_cache.delete(connection.id);
         this.broadcast(JSON.stringify({
-            type: "join"
+            type: "leave",
+            id: connection.id,
         }))
     }
 
     onMessage(connection: Connection, message: WSMessage): void | Promise<void> {
 
         const data = JSON.parse(message.toString()) as ClientToServer_CursorMessages;
+        console.log(connection.id)
 
         switch (data.type) {
             case "message":
-
-                this.broadcast(message, [connection.id]);
-
+                this.broadcast(JSON.stringify({
+                    type: "message",
+                    id: connection.id,
+                    message: data.message,
+                }), [connection.id]);
                 break;
             case "init":
 
@@ -40,6 +51,12 @@ export class Cursors extends Server<Env> {
                     hue: data.hue,
                     pos: [-1, -1],
                 });
+
+                this.broadcast(JSON.stringify({
+                    type: "join",
+                    id: connection.id,
+                    hue: data.hue
+                }), [connection.id]);
 
                 break;
             case "pos":

@@ -12,6 +12,7 @@
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
+		"@solid-primitives/map": "^0.7.2",
 		"partyserver": "^0.0.72",
 		"partysocket": "^1.1.4",
 		"solid-js": "^1.9.7"
