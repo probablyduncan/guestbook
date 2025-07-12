@@ -22,14 +22,14 @@ function App() {
   }>();
 
   listen("init", ({ connections }) => {
-    console.log(connections.length, "others connected");
+    // console.log(connections.length, "others connected");
     connections.forEach(c => {
       cursors.set(c.id, c);
     });
   });
 
   listen("join", ({ id, hue }) => {
-    console.log(id, "joined");
+    // console.log(id, "joined");
     cursors.set(id, {
       id,
       hue,
@@ -38,7 +38,7 @@ function App() {
   });
 
   listen("leave", ({ id }) => {
-    console.log(id, "disconnected");
+    // console.log(id, "disconnected");
     cursors.delete(id);
   });
 
@@ -51,7 +51,7 @@ function App() {
   });
 
   listen("message", ({ id, message }) => {
-    console.log(id, "said", message);
+    // console.log(id, "said", message);
     const c = cursors.get(id);
     if (c) {
       clearTimeout(c.messageTimeoutId);

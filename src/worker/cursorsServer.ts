@@ -35,7 +35,6 @@ export class Cursors extends Server<Env> {
     onMessage(connection: Connection, message: WSMessage): void | Promise<void> {
 
         const data = JSON.parse(message.toString()) as ClientToServer_CursorMessages;
-        console.log(connection.id)
 
         switch (data.type) {
             case "message":
