@@ -8,18 +8,6 @@ function App() {
 
   const { listen } = createCursorSocket();
 
-  // listen("init", (params) => {
-  //   console.log(params);
-  // })
-
-  listen("message", (params) => {
-    console.log("message: ", params.message);
-  })
-
-  listen("init", (params) => {
-    console.log(params);
-  })
-
   return (
     <>
       <h1>Hello!</h1>

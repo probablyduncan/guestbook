@@ -2,8 +2,6 @@ import { routePartykitRequest } from "partyserver";
 
 export default {
   async fetch(request, env) {
-    // console.log(request);
-    // console.log(env);
     
     const partykitResponse = await routePartykitRequest(request, { ...env });
     if (partykitResponse !== null) {

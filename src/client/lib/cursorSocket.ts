@@ -50,7 +50,6 @@ ws.addEventListener("message", e => {
         }
 
         listenersForType.forEach(l => l.listener(message));
-        // console.log("num listeners", message.type, typeListeners.length);
     }
     catch {
         console.error("Invalid Message!")

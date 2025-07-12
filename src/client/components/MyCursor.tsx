@@ -33,7 +33,6 @@ export function MyCursor() {
             if (next >= prev) {
                 next++;
             }
-            console.log(next);
             return next;
         });
     }
