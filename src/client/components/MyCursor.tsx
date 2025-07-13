@@ -52,6 +52,7 @@ export function MyCursor() {
         if (e.key === "/" && document.activeElement !== inputElement) {
             e.preventDefault();
             focusInput();
+            sweat();
             animatePlaceholder();
         }
     }
@@ -67,7 +68,6 @@ export function MyCursor() {
 
             blurInput();
 
-            sweat();
             setMessage(val);
             send("message", {
                 message: val,

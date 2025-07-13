@@ -37,8 +37,13 @@ export function Cursors() {
         })
     });
 
+    function getCountDisplay() {
+        const num = staticCursorData().length;
+        return `There ${num === 1 ? "is" : "are"} ${num} other ${num === 1 ? "person" : "people"} here.`;
+    }
+
     return (<>
-        <p>There are {staticCursorData().length} other people here.</p>
+        <p>{getCountDisplay()}</p>
         <For each={staticCursorData()}>
             {c => <YourCursor id={c.id} hue={c.hue} initialPos={c.initialPos} />}
         </For>
