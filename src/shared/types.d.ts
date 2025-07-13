@@ -1,3 +1,5 @@
+type Vec2 = [number, number];
+
 type ClientToServer_CursorMessages = {
     /**
      * sent on message
@@ -9,7 +11,7 @@ type ClientToServer_CursorMessages = {
      * sent on move
      */
     type: "pos";
-    pos: [number, number];
+    pos: Vec2;
 } | {
     /**
      * sent on mount
@@ -32,7 +34,7 @@ type ServerToClient_CursorMessages = {
      */
     type: "pos";
     id: string;
-    pos: [number, number];
+    pos: Vec2;
 } | {
     /**
      * send all current connections to new connection
@@ -41,7 +43,7 @@ type ServerToClient_CursorMessages = {
     connections: {
         id: string;
         hue: number;
-        pos: [number, number];
+        pos: Vec2;
     }[];
 } | {
     /**

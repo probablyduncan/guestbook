@@ -4,7 +4,7 @@ export class Cursors extends Server<Env> {
 
     _cursor_cache = new Map<string, {
         hue: number;
-        pos: [number, number];
+        pos: Vec2;
     }>();
 
     onConnect(connection: Connection, ctx: ConnectionContext): void | Promise<void> {

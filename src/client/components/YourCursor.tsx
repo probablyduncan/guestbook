@@ -3,10 +3,10 @@ import { createCursorIcon } from "../lib/cursorIcon";
 import { createCursorSocket } from "../lib/cursorSocket";
 import styles from "../styles/cursors.module.css";
 
-export function YourCursor({ id, hue, initialPos }: { id: string, hue: number, initialPos: [number, number] }) {
+export function YourCursor({ id, hue, initialPos }: { id: string, hue: number, initialPos: Vec2 }) {
   const { iconHtml, sweat } = createCursorIcon();
   const [message, setMessage] = createSignal<string>("");
-  const [pos, setPos] = createSignal<[number, number]>(initialPos);
+  const [pos, setPos] = createSignal<Vec2>(initialPos);
   const { listen } = createCursorSocket();
 
   listen("pos", ({ id: targetId, pos }) => {

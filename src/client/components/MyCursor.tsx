@@ -8,7 +8,7 @@ import { FRAME_DELAY } from "../../shared/consts";
 
 export function MyCursor() {
 
-    const [pos, setPos] = createSignal<[number, number]>([-100, -100]);
+    const [pos, setPos] = createSignal<Vec2>([-100, -100]);
     const [message, setMessage] = createSignal<string>("");
 
     const { send } = createCursorSocket();
@@ -21,10 +21,10 @@ export function MyCursor() {
     const { iconHtml, sweat } = createCursorIcon();
     const { animatePlaceholder, randomizePlaceholder, placeholder } = createCursorInputPlaceholder();
 
-    const sendPosDebounced = debounce((pos: [number, number]) => send("pos", { pos }), FRAME_DELAY);
+    const sendPosDebounced = debounce((pos: Vec2) => send("pos", { pos }), FRAME_DELAY);
 
     function handleMouseMove(e: MouseEvent) {
-        const _pos: [number, number] = [
+        const _pos: Vec2 = [
             e.x / window.innerWidth,
             e.y / window.innerHeight,
         ];

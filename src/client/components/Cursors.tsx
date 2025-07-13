@@ -11,7 +11,7 @@ export function Cursors() {
     const [staticCursorData, setStaticCursorData] = createSignal<{
         id: string,
         hue: number,
-        initialPos: [number, number],
+        initialPos: Vec2,
     }[]>([])
 
     listen("init", ({ connections }) => {
