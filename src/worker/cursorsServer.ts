@@ -1,15 +1,5 @@
 import { Server, type Connection, type ConnectionContext, type WSMessage } from "partyserver";
 
-// export class Cursors extends DurableObject<Env> {
-//     constructor(ctx: DurableObjectState, env: Env) {
-//         super(ctx, env);
-//     }
-
-//     async sayHello(): Promise<string> {
-//         return "Hello!";
-//     }
-// }
-
 export class Cursors extends Server<Env> {
 
     _cursor_cache = new Map<string, {
@@ -39,7 +29,7 @@ export class Cursors extends Server<Env> {
         switch (data.type) {
 
             case "message":
-                
+
                 this.broadcast(JSON.stringify({
                     type: "message",
                     id: connection.id,
