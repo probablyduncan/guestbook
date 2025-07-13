@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js";
+import { FRAME_DELAY } from "../../shared/consts";
 
 export function createCursorIcon() {
     const [cursorIndex, setCursorIndex] = createSignal<number>(0);
@@ -13,7 +14,7 @@ export function createCursorIcon() {
                 }
                 return prev;
             })
-        }, 50);
+        }, FRAME_DELAY);
     }
 
     return {

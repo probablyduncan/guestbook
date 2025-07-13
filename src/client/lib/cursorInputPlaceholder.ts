@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js";
+import { FRAME_DELAY } from "../../shared/consts";
 
 export function createCursorInputPlaceholder() {
     
@@ -50,7 +51,7 @@ export function createCursorInputPlaceholder() {
             if (i >= fullText.length) {
                 clearInterval(animatePlaceholderIntervalId);
             }
-        }, 50);
+        }, FRAME_DELAY);
     }
 
     return {

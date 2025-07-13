@@ -28,6 +28,6 @@
   },
   "include": [
     "./src/client",
-    "./src/shared.d.ts"
+    "./src/shared",
   ]
 }

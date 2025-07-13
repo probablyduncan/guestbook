@@ -3,6 +3,8 @@ import styles from "../styles/cursors.module.css";
 import { createCursorSocket } from "../lib/cursorSocket";
 import { createCursorIcon } from "../lib/cursorIcon";
 import { createCursorInputPlaceholder } from "../lib/cursorInputPlaceholder";
+import { debounce } from "../lib/debounce";
+import { FRAME_DELAY } from "../../shared/consts";
 
 export function MyCursor() {
 
@@ -10,14 +12,16 @@ export function MyCursor() {
     const [message, setMessage] = createSignal<string>("");
 
     const { send } = createCursorSocket();
-    
+
     const hue = Math.floor(Math.random() * 255);
-    
+
     let inputElement: HTMLInputElement | undefined;
     let messageTimeoutId: number;
 
     const { iconHtml, sweat } = createCursorIcon();
     const { animatePlaceholder, randomizePlaceholder, placeholder } = createCursorInputPlaceholder();
+
+    const sendPosDebounced = debounce((pos: [number, number]) => send("pos", { pos }), FRAME_DELAY);
 
     function handleMouseMove(e: MouseEvent) {
         const _pos: [number, number] = [
@@ -25,7 +29,7 @@ export function MyCursor() {
             e.y / window.innerHeight,
         ];
         setPos(_pos);
-        send("pos", { pos: _pos });
+        sendPosDebounced(_pos);
     }
 
     function focusInput() {
