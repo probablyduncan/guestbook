@@ -21,16 +21,16 @@ function listen<K extends ServerToClient_CursorMessageKeys>(
     type: K,
     listener: Listener<K>,
 ) {
-    const id = crypto.randomUUID();
+    const listenerId = crypto.randomUUID();
     listeners[type] ??= [];
-    listeners[type].push({ listener, id });
+    listeners[type].push({ listener, id: listenerId });
 
     // cleanup detached listeners
     const owner = getOwner();
     if (owner) {
         runWithOwner(owner, () => {
             onCleanup(() => {
-                const index = listeners[type]?.findIndex((l) => l.id === id) ?? -1;
+                const index = listeners[type]?.findIndex((l) => l.id === listenerId) ?? -1;
                 if (index !== -1) {
                     listeners[type]?.splice(index, 1);
                 }

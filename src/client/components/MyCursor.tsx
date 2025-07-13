@@ -1,8 +1,8 @@
 import { createSignal, onCleanup, onMount } from "solid-js"
 import styles from "../styles/cursors.module.css";
 import { createCursorSocket } from "../lib/cursorSocket";
-import { createCursorIcon } from "../lib/createCursorIcon";
-import { createCursorInputPlaceholder } from "../lib/createCursorInputPlaceholder";
+import { createCursorIcon } from "../lib/cursorIcon";
+import { createCursorInputPlaceholder } from "../lib/cursorInputPlaceholder";
 
 export function MyCursor() {
 
