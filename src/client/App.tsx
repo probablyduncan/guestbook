@@ -1,9 +1,9 @@
 import { createSignal, For } from 'solid-js'
 import { MyCursor } from './components/MyCursor';
 import { createCursorSocket } from './lib/cursorSocket';
-import { POINTER_FRAMES } from './assets/cursor_icons';
 import styles from "./styles/cursors.module.css";
 import { ReactiveMap } from '@solid-primitives/map';
+import { createCursorIcon } from './lib/createCursorIcon';
 
 function App() {
   const [count, setCount] = createSignal(0);
@@ -104,13 +104,16 @@ export default App
 
 
 function YourCursor({ pos, hue, message }: { pos: [number, number], hue: number, message?: string }) {
+
+  const { iconHtml } = createCursorIcon();
+
   return (
     <div class={styles.cursor} style={{
       "--hue": hue,
       "--x": pos[0],
       "--y": pos[1],
     }}>
-      <svg innerHTML={POINTER_FRAMES[0]} />
+      <svg innerHTML={iconHtml()} />
       <div>{message}</div>
     </div>
   )

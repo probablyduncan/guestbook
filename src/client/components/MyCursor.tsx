@@ -1,13 +1,13 @@
 import { createSignal, onCleanup, onMount } from "solid-js"
 import styles from "../styles/cursors.module.css";
 import { createCursorSocket } from "../lib/cursorSocket";
-import { POINTER_FRAMES } from "../assets/cursor_icons";
+import { createCursorIcon } from "../lib/createCursorIcon";
 
 export function MyCursor() {
 
     const [pos, setPos] = createSignal<[number, number]>([-100, -100]);
     const [message, setMessage] = createSignal<string>("");
-    const [cursorIndex, setCursorIndex] = createSignal<number>(0);
+    const { iconHtml, sweat } = createCursorIcon();
 
     const [placeholderIndex, setPlaceholderIndex] = createSignal(0);
     const placeholders = [
@@ -105,22 +105,8 @@ export function MyCursor() {
         if (e.key === "/" && document.activeElement !== inputElement) {
             e.preventDefault();
             focusInput();
-            sweat();
             animatePlaceholder();
         }
-    }
-
-    async function sweat() {
-        const sweatId = setInterval(() => {
-            setCursorIndex(prev => {
-                prev++;
-                if (prev >= POINTER_FRAMES.length) {
-                    clearInterval(sweatId);
-                    prev = 0;
-                }
-                return prev;
-            })
-        }, 50);
     }
 
     function onInputKeyDown(e: KeyboardEvent) {
@@ -134,6 +120,7 @@ export function MyCursor() {
 
             blurInput();
 
+            sweat();
             setMessage(val);
             send("message", {
                 message: val,
@@ -173,7 +160,7 @@ export function MyCursor() {
             "--y": pos()[1],
             "--hue": hue,
         }}>
-            <svg innerHTML={POINTER_FRAMES[cursorIndex()]} />
+            <svg innerHTML={iconHtml()} />
             <input hidden ref={inputElement} />
             <div>{message()}</div>
         </div>

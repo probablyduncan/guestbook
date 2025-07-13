@@ -37,13 +37,16 @@ export class Cursors extends Server<Env> {
         const data = JSON.parse(message.toString()) as ClientToServer_CursorMessages;
 
         switch (data.type) {
+
             case "message":
+                
                 this.broadcast(JSON.stringify({
                     type: "message",
                     id: connection.id,
                     message: data.message,
                 }), [connection.id]);
                 break;
+
             case "init":
 
                 this._cursor_cache.set(connection.id, {
@@ -58,6 +61,7 @@ export class Cursors extends Server<Env> {
                 }), [connection.id]);
 
                 break;
+
             case "pos":
 
                 this._cursor_cache.set(connection.id, {
