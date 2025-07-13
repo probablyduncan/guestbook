@@ -2,75 +2,22 @@ import { createSignal, onCleanup, onMount } from "solid-js"
 import styles from "../styles/cursors.module.css";
 import { createCursorSocket } from "../lib/cursorSocket";
 import { createCursorIcon } from "../lib/createCursorIcon";
+import { createCursorInputPlaceholder } from "../lib/createCursorInputPlaceholder";
 
 export function MyCursor() {
 
     const [pos, setPos] = createSignal<[number, number]>([-100, -100]);
     const [message, setMessage] = createSignal<string>("");
-    const { iconHtml, sweat } = createCursorIcon();
-
-    const [placeholderIndex, setPlaceholderIndex] = createSignal(0);
-    const placeholders = [
-        "type away . . .",
-        "speak your truth",
-        "say something",
-        "spill it!",
-        "let it out!",
-        "spill the beans!",
-        "beans? spill 'em",
-        "gossip time . . .",
-        "ok, chatterbox",
-        "look at you!",
-        "well? say something!",
-        "${placeholder text}",
-        ". . .",
-        "stop that!!",
-        "i'm listening . . .",
-        "what is it this time?",
-    ] as const;
-
-    function randomizePlaceholder() {
-        setPlaceholderIndex(prev => {
-            let next = Math.floor(Math.random() * (placeholders.length - 1));
-            if (next >= prev) {
-                next++;
-            }
-            return next;
-        });
-    }
-
-    let animatePlaceholderIntervalId: number;
-    function animatePlaceholder() {
-
-        if (!inputElement) {
-            return;
-        }
-
-        clearInterval(animatePlaceholderIntervalId);
-        inputElement.placeholder = "";
-
-        const placeholder = placeholders[placeholderIndex()];
-        let i = 0;
-
-        animatePlaceholderIntervalId = setInterval(() => {
-
-            inputElement.placeholder += placeholder.charAt(i);
-            i++;
-
-            if (i >= placeholder.length) {
-                clearInterval(animatePlaceholderIntervalId);
-            }
-        }, 50);
-    }
-
-    // const { sendCursorWSMessage } = createCursorWS();
 
     const { send } = createCursorSocket();
-
+    
     const hue = Math.floor(Math.random() * 255);
-
+    
     let inputElement: HTMLInputElement | undefined;
     let messageTimeoutId: number;
+
+    const { iconHtml, sweat } = createCursorIcon();
+    const { animatePlaceholder, randomizePlaceholder, placeholder } = createCursorInputPlaceholder();
 
     function handleMouseMove(e: MouseEvent) {
         const _pos: [number, number] = [
@@ -161,7 +108,7 @@ export function MyCursor() {
             "--hue": hue,
         }}>
             <svg innerHTML={iconHtml()} />
-            <input hidden ref={inputElement} />
+            <input hidden ref={inputElement} placeholder={placeholder()} />
             <div>{message()}</div>
         </div>
     )
