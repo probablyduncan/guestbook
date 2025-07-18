@@ -88,3 +88,14 @@
         font-style: italic;
     }
 }
+
+.cursor.ghost {
+    opacity: 0.5;
+    animation: ghost-fade both 0.5s;
+}
+
+@keyframes ghost-fade {
+    to {
+        opacity: 0;
+    }
+}
