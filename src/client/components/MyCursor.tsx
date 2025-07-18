@@ -66,7 +66,7 @@ export function MyCursor() {
     }
 
     function onWindowKeyPress(e: KeyboardEvent) {
-        if (e.key === "/" && document.activeElement?.tagName.toLowerCase() !== "input") {
+        if (e.key === "/" && !["input", "textarea"].includes(document.activeElement?.tagName.toLowerCase() ?? "")) {
             e.preventDefault();
             focusInput();
             sweat();
