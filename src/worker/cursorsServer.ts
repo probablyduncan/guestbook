@@ -2,6 +2,8 @@ import { Server, type Connection, type ConnectionContext, type WSMessage } from 
 
 export class Cursors extends Server<Env> {
 
+    readonly options = { hibernate: true };
+
     _cursor_cache = new Map<string, {
         hue: number;
         pos: Vec2;
