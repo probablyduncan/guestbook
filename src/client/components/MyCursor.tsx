@@ -66,7 +66,7 @@ export function MyCursor() {
     }
 
     function onWindowKeyPress(e: KeyboardEvent) {
-        if (e.key === "/" && document.activeElement !== inputElement) {
+        if (e.key === "/" && document.activeElement?.tagName.toLowerCase() !== "input") {
             e.preventDefault();
             focusInput();
             sweat();
