@@ -17,15 +17,12 @@ export function debounce<T extends (...args: any[]) => void>(fn: T, msWait: numb
 
         if (timeRemaining > 0) {
             // if we need to wait, set a timeout that will call the fn when cooldown is over
-            console.log("waiting!", timeRemaining);
             timeoutId = setTimeout(() => {
-                console.log("wait complete");
                 fn(...args)
             }, timeRemaining);
         }
         else {
             // otherwise, update next fire time and call fn
-            console.log("no wait needed")
             fireNextAfter = now + msWait;
             fn(...args);
         }
