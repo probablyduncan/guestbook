@@ -1,10 +1,10 @@
 import { createSignal, For, onCleanup, onMount } from "solid-js"
-import styles from "../styles/cursors.module.css";
-import { createCursorSocket } from "../lib/cursorSocket";
-import { createCursorIcon, POINTER_FRAMES } from "../lib/cursorIcon";
-import { createCursorInputPlaceholder } from "../lib/cursorInputPlaceholder";
-import { debounce } from "../lib/debounce";
-import { FRAME_DELAY } from "../../shared/consts";
+import styles from "../../styles/cursors.module.css";
+import { createCursorSocket } from "../../lib/cursorSocket";
+import { createCursorIcon, POINTER_FRAMES } from "../../lib/cursorIcon";
+import { createCursorInputPlaceholder } from "../../lib/cursorInputPlaceholder";
+import { debounce } from "../../lib/debounce";
+import { FRAME_DELAY } from "../../../shared/consts";
 
 export function MyCursor() {
 

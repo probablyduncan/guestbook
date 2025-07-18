@@ -1,6 +1,6 @@
 import { createSignal, For } from "solid-js"
 import { MyCursor } from "./MyCursor";
-import { createCursorSocket } from "../lib/cursorSocket";
+import { createCursorSocket } from "../../lib/cursorSocket";
 import { YourCursor } from "./YourCursor";
 
 export function Cursors() {

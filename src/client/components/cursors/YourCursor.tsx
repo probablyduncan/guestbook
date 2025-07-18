@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
-import { createCursorIcon } from "../lib/cursorIcon";
-import { createCursorSocket } from "../lib/cursorSocket";
-import styles from "../styles/cursors.module.css";
+import { createCursorIcon } from "../../lib/cursorIcon";
+import { createCursorSocket } from "../../lib/cursorSocket";
+import styles from "../../styles/cursors.module.css";
 
 export function YourCursor({ id, hue, initialPos }: { id: string, hue: number, initialPos: Vec2 }) {
   const { iconHtml, sweat } = createCursorIcon();
