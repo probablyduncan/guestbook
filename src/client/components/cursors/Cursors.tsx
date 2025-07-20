@@ -42,11 +42,16 @@ export function Cursors() {
         return `There ${num === 1 ? "is" : "are"} ${num} other ${num === 1 ? "person" : "people"} here.`;
     }
 
+    function getActionDesc() {
+        const num = staticCursorData().length;
+        return num > 0 ? "chat." : "talk to yourself."
+    }
+
     return (<>
-        <p>{getCountDisplay()}</p>
         <For each={staticCursorData()}>
             {c => <YourCursor id={c.id} hue={c.hue} initialPos={c.initialPos} />}
         </For>
         <MyCursor />
+        <footer>{getCountDisplay()} Press <kbd>/</kbd> to {getActionDesc()}</footer>
     </>)
 }

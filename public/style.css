@@ -4,6 +4,16 @@
     width: 100svw;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 1rem;
+    width: min(55ch, 100%);
+}
+
 kbd {
     background-color: #eee;
     border-radius: 3px;
@@ -18,4 +28,191 @@ kbd {
     line-height: 1;
     padding: 2px 4px;
     white-space: nowrap;
+}
+
+.pastels {
+    --hue: 0;
+    --color-dark: oklch(70% 0.24 var(--hue));
+    --color-light: oklch(95% 0.05 var(--hue));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    text-align: right;
+    font-size: 0.875rem;
+
+    &, kbd {
+        color: gray;
+    }
+}
+
+.cursor,
+.cursor svg.icon {
+    z-index: 5;
+}
+
+.cursor#my-cursor,
+.cursor#my-cursor svg.icon {
+    z-index: 6;
+}
+
+.cursor input,
+.cursor .message {
+    z-index: 10;
+}
+
+:root:has(.cursor#my-cursor) {
+
+    &,
+    & * {
+        cursor: none;
+    }
+}
+
+.cursor {
+    --x: -1;
+    --y: -1;
+
+    position: fixed;
+    left: calc(var(--x) * 100svw);
+    top: calc(var(--y) * 100svh);
+
+    user-select: none;
+    pointer-events: none;
+
+    svg {
+        position: absolute;
+        top: -15px;
+        left: -15px;
+
+        fill-rule: evenodd;
+        clip-rule: evenodd;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 1.5;
+
+        path {
+            fill: var(--color-light);
+            stroke: var(--color-dark);
+            stroke-width: 0.5px;
+        }
+    }
+
+    input {
+        width: 20ch;
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        columns: black;
+        background-color: var(--color-light);
+        border: 0.5px solid var(--color-dark);
+        border-radius: 4px;
+
+        &::placeholder {
+            color: var(--color-dark);
+            opacity: 0.5;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+    div {
+        text-wrap: nowrap;
+        white-space: pre;
+
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+
+        font-style: italic;
+    }
+
+    &.ghost {
+        opacity: 0.5;
+        animation: ghost-fade both 0.5s;
+    }
+}
+
+@keyframes ghost-fade {
+    to {
+        opacity: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+form.form {
+
+    input,
+    textarea {
+        font-family: sans-serif;
+        font-size: 0.875rem;
+        /* background-color: var(--color-light);
+        border: 0.5px solid var(--color-dark);
+        border-radius: 4px; */
+        padding: 3px 6px;
+
+        &::placeholder {
+            /* color: var(--color-dark); */
+            /* opacity: 0.5; */
+        }
+
+        &:focus {
+            /* box-shadow: 6px 3px 3px 2px var(--color-light); */
+            /* outline: 2px solid var(--color-dark); */
+        }
+        
+        &.full {
+            width: 100%;
+        }
+
+        &.half {
+            width: 50%;
+        }
+    }
+
+    textarea {
+        height: 100px;
+    }
+
+    fieldset {
+        /* border: 0.5px solid var(--color-dark); */
+    }
+
+    legend {
+        /* color: var(--color-dark); */
+        /* font-family: cursive; */
+    }
+
 }

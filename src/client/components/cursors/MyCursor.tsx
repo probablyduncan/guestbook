@@ -1,5 +1,4 @@
 import { createSignal, For, onCleanup, onMount } from "solid-js"
-import styles from "../../styles/cursors.module.css";
 import { createCursorSocket } from "../../lib/cursorSocket";
 import { createCursorIcon, POINTER_FRAMES } from "../../lib/cursorIcon";
 import { createCursorInputPlaceholder } from "../../lib/cursorInputPlaceholder";
@@ -36,7 +35,7 @@ export function MyCursor() {
         });
     }
 
-    function handleMouseMove(e: MouseEvent) {
+    function handleMouseMove(e: { x: number, y: number }) {
         const _pos: Vec2 = [
             e.x / window.innerWidth,
             e.y / window.innerHeight,
@@ -121,7 +120,7 @@ export function MyCursor() {
     return (<>
         <For each={ghosts()}>
             {(ghost) => (
-                <div class={styles.cursor + " " + styles.ghost} style={{
+                <div class="cursor pastels ghost" style={{
                     "--x": ghost[0],
                     "--y": ghost[1],
                     "--hue": hue,
@@ -130,7 +129,7 @@ export function MyCursor() {
                 </div>
             )}
         </For>
-        <div class={styles.cursor} style={{
+        <div id="my-cursor" class="cursor pastels" style={{
             "--x": pos()[0],
             "--y": pos()[1],
             "--hue": hue,
