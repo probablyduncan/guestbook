@@ -3,6 +3,7 @@ import { GuestbookTemplate } from "./formTemplates/GuestbookTemplate";
 import { JobAppTemplate } from "./formTemplates/JobAppTemplate";
 import { HomestayTemplate } from "./formTemplates/HomestayTemplate";
 import { useGuestbookValidation } from "../lib/useFormValidation";
+import { CollegeAppTemplate } from "./formTemplates/CollegeAppTemplate";
 
 const templates: Record<GuestbookEntryTemplateType, {
     name: string;
@@ -18,7 +19,7 @@ const templates: Record<GuestbookEntryTemplateType, {
     },
     college: {
         name: "College Application",
-        snippet: () => "",
+        snippet: CollegeAppTemplate,
     },
     homestay: {
         name: "Homestay Application",
@@ -94,11 +95,14 @@ export function GuestbookForm() {
                 <br />
                 <fieldset>
                     {/* <legend>Submit</legend> */}
-                    <p>
-                        <em style={{ "font-size": "0.875em" }}>
-                            All submissions will be reviewed prior to approval. 
-                            If you write something vile, I'm gonna delete it! I mean it!
-                        </em>
+                    <p style={{ "font-size": "0.875em", "text-align": "justify", "text-align-last": "justify", "line-height": 1.4, "max-width": "360px" }}>
+                        All submissions will be reviewed!
+                        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+                        If you write
+                        <br />
+                        something vile,
+                        &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+                        I'm gonna delete it! I mean it!
                     </p>
                     <p>
                         <button type="submit">Submit</button>

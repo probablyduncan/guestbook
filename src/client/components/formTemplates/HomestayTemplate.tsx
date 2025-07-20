@@ -1,15 +1,17 @@
 import { createSignal, Show } from "solid-js"
 import { useGuestbookValidation } from "../../lib/useFormValidation";
+import { useInputValueSignal } from "../../lib/useInputValue";
 
 export function HomestayTemplate() {
 
     const [placeName, setPlaceName] = createSignal<string>("");
+    const { valueSignal } = useInputValueSignal();
     const { validation } = useGuestbookValidation();
 
     return (
         <fieldset>
             <legend>AirBreakfastInBed Reservation Confirmation</legend>
-            <select name="stay" required onChange={e => setPlaceName(e.target.value)}>
+            <select name="stay" required use:valueSignal={setPlaceName}>
                 <option value="">Select Your Getaway</option>
                 <option>3-bed entire home in Lickwhisker</option>
                 <option>Treasonoaks Guesthouse (single room)</option>
