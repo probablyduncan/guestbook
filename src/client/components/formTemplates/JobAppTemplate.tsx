@@ -68,10 +68,10 @@ export function JobAppTemplate() {
                 <textarea name="experience" aria-label="Experience Description" required class="full" style={{ resize: "none" }} placeholder="Describe any relevant experience (150-200 characters)" minLength={150} maxLength={200} />
             </p>
             <p>
-                <textarea name="gapExplanation" aria-label="Culture Fit Explanation" required class="full" style={{ resize: "none" }} placeholder="List 10 reasons you would be a good fit for DunCo™ Enterprise Solutions (please use 3rd edition page numbers when citing the DunCo™ Family Culture Handbook) (200 characters)" minLength={200} maxLength={200} />
+                <textarea name="fit" aria-label="Culture Fit Explanation" required class="full" style={{ resize: "none" }} placeholder="List 10 reasons you would be a good fit for DunCo™ Enterprise Solutions (please use 3rd edition page numbers when citing the DunCo™ Family Culture Handbook) (200 characters)" minLength={200} maxLength={200} />
             </p>
             <p>
-                <textarea name="gapExplanation" aria-label="Resume Gap Explanation" required class="full" style={{ resize: "none" }} placeholder="Kindly provide an explanation of the 3 month gap in your resume (2003, June to August) (min 800 characters)" minLength={800} />
+                <textarea name="gap" aria-label="Resume Gap Explanation" required class="full" style={{ resize: "none" }} placeholder="Kindly provide an explanation of the 3 month gap in your resume (2003, June to August) (min 800 characters)" minLength={800} />
             </p>
             <p>
                 <input name="desiredSalary" required placeholder="Desired salary (USD)" type="number" aria-label="Desired Salary" class="half" onKeyDown={blockSalaryKeydown} min={0} max={31495} />

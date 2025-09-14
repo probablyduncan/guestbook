@@ -17,7 +17,7 @@ export function CollegeAppTemplate() {
                     <option>London School of Academics</option>
                     <option>Springfield Elementary</option>
                     <option>The School for Liberal Arts</option>
-                    <option>Hard Knocks</option>
+                    <option>Hard Knocks 🤜🫨</option>
                     <option>University of the Prime Meridian</option>
                     <option>The Prince-Widow School</option>
                     <option>The School of Thought</option>

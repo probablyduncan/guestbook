@@ -16,11 +16,18 @@ type GuestbookFormData = {
     fax: string;
     jobTitle: string;
     experience: string;
-    cultureFit: string;
-    gapExplanation: string;
+    fit: string;
+    gap: string;
     desiredSalary: number;
 } | {
     type: "college";
+
+    // in 200 words, why would you be a good fit for ${school}
+    fit: string;
+
+    // what grade do you plan to get
+    grade: string;
+    
     extracurriculars: {
         type: "volunteering" | "sports captain" | "small business";
         text: string;
